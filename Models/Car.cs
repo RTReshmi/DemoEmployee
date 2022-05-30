@@ -11,7 +11,7 @@ namespace DemoEmployee.Models
 
         [ForeignKey("Id")]
         public Guid EngineId { get; set; }
-        public virtual Engine ? engine { get; set; }  =new Engine();
+        public virtual Engine ? engine { get; set; }  
 
 
         public string Name { get; set; }
