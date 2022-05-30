@@ -27,10 +27,10 @@ namespace DemoEmployee.Controllers
             var employee=employeeService.GetById(id);
             return employee;
         }
-        public
-        {
+        
+        
 
-        }
+        
 
 
     }

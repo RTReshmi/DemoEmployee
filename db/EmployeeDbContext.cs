@@ -9,6 +9,12 @@ namespace DemoEmployee.db
         {
         }
         public DbSet<Employee> Employee { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Car> Cars{ get; set; }
+        public DbSet<Engine>Engines  { get; set; }
+
     }
 
 }

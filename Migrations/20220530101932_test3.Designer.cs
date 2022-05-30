@@ -4,6 +4,7 @@ using DemoEmployee.db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoEmployee.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    partial class EmployeeDBModelSnapshot : ModelSnapshot
+    [Migration("20220530101932_test3")]
+    partial class test3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,33 +23,6 @@ namespace DemoEmployee.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("DemoEmployee.Models.Car", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Colour")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("EngineId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Mileage")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EngineId");
-
-                    b.ToTable("Cars");
-                });
 
             modelBuilder.Entity("DemoEmployee.Models.Department", b =>
                 {
@@ -101,24 +76,6 @@ namespace DemoEmployee.Migrations
                     b.ToTable("Employee");
                 });
 
-            modelBuilder.Entity("DemoEmployee.Models.Engine", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StrokeNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Engines");
-                });
-
             modelBuilder.Entity("DemoEmployee.Models.Teacher", b =>
                 {
                     b.Property<Guid>("Id")
@@ -145,17 +102,6 @@ namespace DemoEmployee.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Teachers");
-                });
-
-            modelBuilder.Entity("DemoEmployee.Models.Car", b =>
-                {
-                    b.HasOne("DemoEmployee.Models.Engine", "engine")
-                        .WithMany()
-                        .HasForeignKey("EngineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("engine");
                 });
 
             modelBuilder.Entity("DemoEmployee.Models.Teacher", b =>
