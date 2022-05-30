@@ -9,9 +9,9 @@ namespace DemoEmployee.Models
 
 
 
-        public string Name { get; set; }
-        public string HOD { get; set; }
-        public int StaffNumber { get; set; }
+        public string? Name { get; set; }
+        public string? HOD { get; set; }
+        public int? StaffNumber { get; set; }
 
 
     }
