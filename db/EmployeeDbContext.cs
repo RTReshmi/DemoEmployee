@@ -14,6 +14,8 @@ namespace DemoEmployee.db
         public DbSet<Department> Departments { get; set; }
         public DbSet<Car> Cars{ get; set; }
         public DbSet<Engine>Engines  { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Customer> customers { get; set; }
 
     }
 

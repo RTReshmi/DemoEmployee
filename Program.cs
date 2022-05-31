@@ -15,7 +15,9 @@ builder.Services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer
     builder.Configuration.GetConnectionString("Default")
     ));
 builder.Services.AddTransient<IEmployeeService,EmployeeService>();
-
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
 var app = builder.Build();
 
