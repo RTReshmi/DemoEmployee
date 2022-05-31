@@ -16,6 +16,7 @@ namespace DemoEmployee.db
         public DbSet<Engine>Engines  { get; set; }
         public DbSet<DemoEmployee.Models.Order>? Order { get; set; }
         public DbSet<DemoEmployee.Models.Customer>? Customer { get; set; }
+        public DbSet<DemoEmployee.Models.Photo>? Photo { get; set; }
 
     }
 

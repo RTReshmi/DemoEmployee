@@ -12,55 +12,55 @@ namespace DemoEmployee.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class PhotosController : ControllerBase
     {
         private readonly EmployeeDbContext _context;
 
-        public CustomersController(EmployeeDbContext context)
+        public PhotosController(EmployeeDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Customers
+        // GET: api/Photos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
+        public async Task<ActionResult<IEnumerable<Photo>>> GetPhoto()
         {
-          if (_context.Customer == null)
+          if (_context.Photo == null)
           {
               return NotFound();
           }
-            return await _context.Customer.Include(x=>x.Orders).Include(x=>x.Photos).ToListAsync();
+            return await _context.Photo.ToListAsync();
         }
 
-        // GET: api/Customers/5
+        // GET: api/Photos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(Guid id)
+        public async Task<ActionResult<Photo>> GetPhoto(Guid id)
         {
-          if (_context.Customer == null)
+          if (_context.Photo == null)
           {
               return NotFound();
           }
-            var customer = await _context.Customer.FindAsync(id);
+            var photo = await _context.Photo.FindAsync(id);
 
-            if (customer == null)
+            if (photo == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            return photo;
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Photos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(Guid id, Customer customer)
+        public async Task<IActionResult> PutPhoto(Guid id, Photo photo)
         {
-            if (id != customer.Id)
+            if (id != photo.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            _context.Entry(photo).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace DemoEmployee.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!PhotoExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace DemoEmployee.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
+        // POST: api/Photos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<Photo>> PostPhoto(Photo photo)
         {
-          if (_context.Customer == null)
+          if (_context.Photo == null)
           {
-              return Problem("Entity set 'EmployeeDbContext.Customer'  is null.");
+              return Problem("Entity set 'EmployeeDbContext.Photo'  is null.");
           }
-            _context.Customer.Add(customer);
+            _context.Photo.Add(photo);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+            return CreatedAtAction("GetPhoto", new { id = photo.Id }, photo);
         }
 
-        // DELETE: api/Customers/5
+        // DELETE: api/Photos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(Guid id)
+        public async Task<IActionResult> DeletePhoto(Guid id)
         {
-            if (_context.Customer == null)
+            if (_context.Photo == null)
             {
                 return NotFound();
             }
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
+            var photo = await _context.Photo.FindAsync(id);
+            if (photo == null)
             {
                 return NotFound();
             }
 
-            _context.Customer.Remove(customer);
+            _context.Photo.Remove(photo);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CustomerExists(Guid id)
+        private bool PhotoExists(Guid id)
         {
-            return (_context.Customer?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Photo?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
