@@ -4,6 +4,7 @@ using DemoEmployee.db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoEmployee.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    partial class EmployeeDBModelSnapshot : ModelSnapshot
+    [Migration("20220531032751_test6")]
+    partial class test6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,24 +49,6 @@ namespace DemoEmployee.Migrations
                     b.HasIndex("EngineId");
 
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("DemoEmployee.Models.Customer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("DemoEmployee.Models.Department", b =>
@@ -134,34 +118,6 @@ namespace DemoEmployee.Migrations
                     b.ToTable("Engines");
                 });
 
-            modelBuilder.Entity("DemoEmployee.Models.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("OrderName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Order");
-                });
-
             modelBuilder.Entity("DemoEmployee.Models.Teacher", b =>
                 {
                     b.Property<Guid>("Id")
@@ -201,17 +157,6 @@ namespace DemoEmployee.Migrations
                     b.Navigation("engine");
                 });
 
-            modelBuilder.Entity("DemoEmployee.Models.Order", b =>
-                {
-                    b.HasOne("DemoEmployee.Models.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("DemoEmployee.Models.Teacher", b =>
                 {
                     b.HasOne("DemoEmployee.Models.Department", "department")
@@ -221,11 +166,6 @@ namespace DemoEmployee.Migrations
                         .IsRequired();
 
                     b.Navigation("department");
-                });
-
-            modelBuilder.Entity("DemoEmployee.Models.Customer", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

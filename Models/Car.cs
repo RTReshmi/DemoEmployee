@@ -17,5 +17,6 @@ namespace DemoEmployee.Models
         public string Name { get; set; }
         public string Colour { get; set; }
         public int Mileage { get; set; }
+        
     }
 }
