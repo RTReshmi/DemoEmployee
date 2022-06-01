@@ -1,12 +1,16 @@
 ﻿using DemoEmployee.Models;
+using DemoEmployee.ViewModel;
 
 namespace DemoEmployee.Services.Interface
 {
     public interface ITeacherservice
     {
 
-        public Teacher Add(Teacher teacher);
+        public TeacherViewModel Add(TeacherViewModel teacher);
+       
+        
+        
         public List<Teacher> GetAll();
-        public Teacher Get(Guid id);
+        public TeacherViewModel Get(Guid id);
     }
 }
