@@ -14,7 +14,7 @@ namespace DemoEmployee.Services
             this._context = _context;
         }
 
-        public Teacher Add(TeacherViewModel teacher)
+        public TeacherViewModel Add(TeacherViewModel teacher)
         {
             Teacher teacher1 = new Teacher();
             teacher1.Name = teacher.Name;
@@ -23,7 +23,7 @@ namespace DemoEmployee.Services
             _context.Teachers.Add(teacher1);
             _context.SaveChanges();
 
-            return teacher1;
+            return teacher;
         }
 
         public TeacherViewModel Get(Guid id)
