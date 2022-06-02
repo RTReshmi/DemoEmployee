@@ -19,6 +19,9 @@ builder.Services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer
     builder.Configuration.GetConnectionString("Default")
     ));
 builder.Services.AddTransient<IEmployeeService,EmployeeService>();
+builder.Services.AddTransient<ITeacherService, TeacherService>();
+builder.Services.AddTransient<ICustomerServices, CustomerServices >();  
+
 
 
 var app = builder.Build();

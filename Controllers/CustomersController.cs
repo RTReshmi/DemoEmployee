@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DemoEmployee.Models;
 using DemoEmployee.db;
+using DemoEmployee.Services;
+using DemoEmployee.DTOs;
+using DemoEmployee.Services.Interface;
 
 namespace DemoEmployee.Controllers
 {
@@ -15,10 +18,12 @@ namespace DemoEmployee.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly EmployeeDbContext _context;
+        private readonly ICustomerServices _customerServices;
 
-        public CustomersController(EmployeeDbContext context)
+       public CustomersController(EmployeeDbContext context,ICustomerServices customerServices)
         {
             _context = context;
+            _customerServices = customerServices;  
         }
 
         // GET: api/Customers
@@ -34,20 +39,11 @@ namespace DemoEmployee.Controllers
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(Guid id)
+        public async Task<ActionResult<CustomerDTO>> GetCustomer(Guid id)
         {
-          if (_context.Customer == null)
-          {
-              return NotFound();
-          }
-            var customer = await _context.Customer.FindAsync(id);
+            var result = _customerServices.GetCustomer(id);
 
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return customer;
+            return result;
         }
 
         // PUT: api/Customers/5
@@ -84,18 +80,11 @@ namespace DemoEmployee.Controllers
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<Customer>> Post(CustomerDTO customerdto)
         {
-          if (_context.Customer == null)
-          {
-              return Problem("Entity set 'EmployeeDbContext.Customer'  is null.");
-          }
-            _context.Customer.Add(customer);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+            _customerServices.AddCustomer(customerdto);
+            return Ok();
         }
-
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(Guid id)

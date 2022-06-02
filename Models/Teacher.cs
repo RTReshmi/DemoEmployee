@@ -10,7 +10,7 @@ namespace DemoEmployee.Models
         public Guid Id { get; set; }
         [ForeignKey("Id")]
         public Guid DepartmentId { get; set; }
-        public virtual Department ? department { get; set; }   
+      public virtual Department? department { get; set; }
 
 
         public string Name { get; set; }
