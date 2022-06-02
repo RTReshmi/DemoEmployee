@@ -52,16 +52,11 @@ namespace DemoEmployee.Controllers
         // PUT: api/Teachers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTeacher(Guid id, Teacher teacher)
+        public async Task<IActionResult> PutTeacher(Guid id, TeacherDTO teacherdto)
         {
 
-        
-           
-
-               await _context.SaveChangesAsync();
-           
-          
-            return NoContent();
+            _teacherService.UpdateTeacher(teacherdto);
+             return NoContent();
         }
 
         // POST: api/Teachers
@@ -78,31 +73,18 @@ namespace DemoEmployee.Controllers
                 return Ok();
             
             
-        } 
+        }
 
         // DELETE: api/Teachers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTeacher(Guid id)
+        public async Task<TeacherDTO> DeleteTeacher(Guid id)
         {
-            if (_context.Teachers == null)
-            {
-                return NotFound();
-            }
-            var teacher = await _context.Teachers.FindAsync(id);
-            if (teacher == null)
-            {
-                return NotFound();
-            }
 
-            _context.Teachers.Remove(teacher);
-            await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+            _teacherService.DeleteTeacher(id);
 
-        private bool TeacherExists(Guid id)
-        {
-            return (_context.Teachers?.Any(e => e.Id == id)).GetValueOrDefault();
+
+            return null;
         }
     }
 }

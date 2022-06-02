@@ -23,7 +23,11 @@ namespace DemoEmployee.Services
             return customerdto;
         }
 
-       
+        public CustomerDTO DeleteCustomer(CustomerDTO customerdto)
+        {
+            throw new NotImplementedException();
+        }
+
         public CustomerDTO GetCustomer(Guid id)
         {
             var result = _dbContext.Customer.Find(id);
@@ -32,6 +36,18 @@ namespace DemoEmployee.Services
             customerDTO.Address = result.Address;
             return customerDTO; 
             
+        }
+
+        public CustomerDTO UpdateCustomer(CustomerDTO customerdto)
+        {
+            Customer customer = new Customer();
+            customer.Id=customerdto.Id; 
+            customer.Name = customerdto.Name;
+            _dbContext.Customer.Update(customer);
+            _dbContext.SaveChanges();// must
+
+            return customerdto;
+
         }
     }
 }

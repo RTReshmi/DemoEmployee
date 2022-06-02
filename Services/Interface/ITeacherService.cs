@@ -7,8 +7,8 @@ namespace DemoEmployee.Services.Interface
         public TeacherDTO AddTeacher(TeacherDTO teacher);   
         public TeacherDTO GetTeacher(Guid id);
 
-        public TeacherDTO UpdateTeacher();
-        public TeacherDTO DeleteTeacher();
+        public TeacherDTO UpdateTeacher(TeacherDTO teacher);
+        public TeacherDTO DeleteTeacher(Guid id);
 
 
 
