@@ -52,34 +52,24 @@ namespace DemoEmployee.Controllers
 
         // PUT: api/Cars/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{id}")]               //10         //marut   no klo2 2323
         public async Task<IActionResult> PutCar(Guid id, Car car)
         {
-            if (id != car.Id)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(car).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CarExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var carObj = await _context.Cars.FindAsync(id);
 
-            return NoContent();
+            carObj.Name = car.Name;
+
+
+            await _context.SaveChangesAsync();
+
+            return null;
+
         }
+
+            
+        
 
         // POST: api/Cars
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

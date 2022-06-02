@@ -54,29 +54,13 @@ namespace DemoEmployee.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTeacher(Guid id, Teacher teacher)
         {
-            if (id != teacher.Id)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(teacher).State = EntityState.Modified;
+        
+           
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TeacherExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+               await _context.SaveChangesAsync();
+           
+          
             return NoContent();
         }
 
