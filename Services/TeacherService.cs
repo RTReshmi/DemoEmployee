@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DemoEmployee.db;
+using DemoEmployee.ErrorLogging;
 using DemoEmployee.Models;
 using DemoEmployee.Services.Interface;
 using DemoEmployee.ViewModel;
@@ -20,16 +21,29 @@ namespace DemoEmployee.Services
         public TeacherViewModel Add(TeacherViewModel teacher)
         {
 
-           var teacherObj= _mapper.Map<Teacher>(teacher);
+            try
+            {
+                var teacherObj = _mapper.Map<Teacher>(teacher);
 
-            Teacher teacher1 = new Teacher();
-            teacher1.Name = teacher.Name;
-            teacher1.Email= teacher.Email;
+                var reversemap = _mapper.Map<TeacherViewModel>(teacherObj);
 
-            _context.Teachers.Add(teacherObj);
-            _context.SaveChanges();
+                Teacher teacher1 = new Teacher();
+                teacher1.Name = teacher.Name;
+                teacher1.Email = teacher.Email;
 
-            return teacher;
+                _context.Teachers.Add(teacherObj);
+                _context.SaveChanges();
+
+                return teacher;
+            }
+            catch (Exception ex)
+            {
+
+                ErrorHanler errorHanler = new ErrorHanler();
+                errorHanler.WriteError(ex.Message, "Inside Service");
+            }
+
+            return null;
         }
 
         public TeacherViewModel Get(Guid id)

@@ -9,6 +9,15 @@ namespace DemoEmployee.Mapping
         public AutoMapperProfile()
         {
             CreateMap<Teacher, TeacherViewModel>().ReverseMap();
+          
+
+
+
+
+
+
+
+
         }
     }
 }

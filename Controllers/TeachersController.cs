@@ -9,6 +9,7 @@ using DemoEmployee.Models;
 using DemoEmployee.db;
 using DemoEmployee.Services.Interface;
 using DemoEmployee.ViewModel;
+using DemoEmployee.ErrorLogging;
 
 namespace DemoEmployee.Controllers
 {
@@ -49,8 +50,18 @@ namespace DemoEmployee.Controllers
         [HttpPost]
         public async Task<ActionResult<Teacher>> PostTeacher(TeacherViewModel teacher)
         {
-            var _teacher = teacherservice.Add(teacher);
-            return Ok(_teacher);
+            try
+            {
+                var _teacher = teacherservice.Add(teacher);
+                return Ok(_teacher);
+
+            }
+            catch (Exception ex)
+            {
+                // error logging
+                ErrorHanler errorHanler = new ErrorHanler();
+                errorHanler.WriteError(ex.Message, "Inside controller");
+            }
         }
 
 
