@@ -5,7 +5,7 @@ namespace DemoEmployee.Services.Interface
 {
     public interface ITeacherservice
     {
-
+            
         public TeacherViewModel Add(TeacherViewModel teacher);
        
         

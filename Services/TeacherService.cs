@@ -1,4 +1,5 @@
-﻿using DemoEmployee.db;
+﻿using AutoMapper;
+using DemoEmployee.db;
 using DemoEmployee.Models;
 using DemoEmployee.Services.Interface;
 using DemoEmployee.ViewModel;
@@ -9,18 +10,23 @@ namespace DemoEmployee.Services
     {
 
         private readonly EmployeeDbContext _context;
-        public TeacherService(EmployeeDbContext _context)
+        private readonly IMapper _mapper;
+        public TeacherService(EmployeeDbContext _context, IMapper _mapper)
         {
             this._context = _context;
+            this._mapper = _mapper;
         }
 
         public TeacherViewModel Add(TeacherViewModel teacher)
         {
+
+           var teacherObj= _mapper.Map<Teacher>(teacher);
+
             Teacher teacher1 = new Teacher();
             teacher1.Name = teacher.Name;
             teacher1.Email= teacher.Email;
 
-            _context.Teachers.Add(teacher1);
+            _context.Teachers.Add(teacherObj);
             _context.SaveChanges();
 
             return teacher;
