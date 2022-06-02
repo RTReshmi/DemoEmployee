@@ -15,9 +15,14 @@ namespace DemoEmployee.Services
         public TeacherDTO AddTeacher(TeacherDTO teacherDto)
         {
             Teacher teacher = new Teacher();
-            teacher.Id = teacherDto.Id; 
+            
             teacher.Name = teacherDto.Name;
-            teacher.ContactNumber = teacherDto.ContactNumber;
+            teacher.Email = teacherDto.Email;
+            teacher.ContactNumber= teacherDto.ContactNumber;
+
+
+            teacher.DepartmentId=teacherDto.DepartmentId;
+          
             
             
 
