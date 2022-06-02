@@ -62,6 +62,7 @@ namespace DemoEmployee.Controllers
                 ErrorHanler errorHanler = new ErrorHanler();
                 errorHanler.WriteError(ex.Message, "Inside controller");
             }
+            return null;
         }
 
 
