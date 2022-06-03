@@ -13,6 +13,10 @@ namespace DemoEmployee.Models
         public string? HOD { get; set; }
         public int? StaffNumber { get; set; }
 
+        public Guid ? UserId { get; set; }
+        public virtual Teacher Teacher { get; set; }
+
+
 
     }
 }
