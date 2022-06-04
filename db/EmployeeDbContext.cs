@@ -38,9 +38,36 @@ namespace DemoEmployee.db
 
 
 
-
+            //one to one
             var teacher=modelBuilder.Entity<Teacher>(); 
             teacher.HasKey(x=>x.Id);
+            teacher.HasOne(x=>x.department)
+                .WithOne(x=>x.teacher)
+                .HasForeignKey<Teacher>(x=>x.DepartmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            //one to many
+            var order=modelBuilder.Entity<Order>();
+            order.HasKey(x=>x.Id);
+            order.HasOne(x => x.Customer)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade); 
+            
+
+            var photo=modelBuilder.Entity<Photo>(); 
+            photo.HasKey(x=>x.Id);
+            photo.HasOne(x => x.Customer)
+                .WithMany(x => x.Photos)
+                .HasForeignKey(x => x.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
+
+
+
             
             
 
