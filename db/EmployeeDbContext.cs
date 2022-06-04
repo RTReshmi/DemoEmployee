@@ -20,6 +20,9 @@ namespace DemoEmployee.db
         public DbSet<Book> Book { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<Book_Author> Book_Author { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<StudentAddress> StudentAddresses { get; set; }
+        public DbSet<StudentMark> StudentMarks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,6 +65,37 @@ namespace DemoEmployee.db
                 .WithMany(x => x.Photos)
                 .HasForeignKey(x => x.CustomerId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            
+            //one to one
+            var student=modelBuilder.Entity<Student>();
+            student.HasKey(x=>x.Id);
+            student.HasOne(x => x.StudentAddress)
+                .WithOne(x => x.Student)
+                .HasForeignKey<Student>(x => x.AddressId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //one to many
+
+            var studentMark=modelBuilder.Entity<StudentMark>(); 
+            studentMark.HasKey(x=>x.Id);
+            studentMark.HasOne(x => x.Student)
+                .WithMany(x => x.StudentMarks)
+                .HasForeignKey(x => x.StudentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //many to many
+
+            var book_author = modelBuilder.Entity<Book_Author>();
+            book_author.HasKey(x=>x.Id);
+            book_author.HasOne(x => x.Book)
+                .WithMany(x => x.Book_Authors)
+                .HasForeignKey(x => x.BookId);
+
+            book_author.HasOne(x => x.Author)
+                .WithMany(x => x.Book_Authors)
+                .HasForeignKey(x => x.AuthorId);
+
 
 
 
