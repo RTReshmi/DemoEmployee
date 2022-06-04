@@ -64,9 +64,10 @@ namespace DemoEmployee.Services
 
         }
 
-        public TeacherDTO UpdateTeacher(TeacherDTO teacherDto)
+        public TeacherDTO UpdateTeacher(Guid id,TeacherDTO teacherDto)
         {
-            Teacher teacher = new Teacher();
+            var teacher = dbContext.Teachers.Find(id);
+               
             teacher.Name = teacherDto.Name;
             teacher.Email = teacherDto.Email;
             teacher.ContactNumber = teacherDto.ContactNumber;

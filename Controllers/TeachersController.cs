@@ -55,7 +55,7 @@ namespace DemoEmployee.Controllers
         public async Task<IActionResult> PutTeacher(Guid id, TeacherDTO teacherdto)
         {
 
-            _teacherService.UpdateTeacher(teacherdto);
+            _teacherService.UpdateTeacher(id,teacherdto);
              return NoContent();
         }
 

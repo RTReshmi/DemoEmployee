@@ -10,7 +10,7 @@ namespace DemoEmployee.Models
 
 
         [ForeignKey("Id")]
-        public Guid EngineId { get; set; }
+        public Guid EngineId { get; set; }//fk
         public virtual Engine ? engine { get; set; }  
 
 
